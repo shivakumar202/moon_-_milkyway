@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moon & Milky Way | Stargazing Neil Island, Andaman</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <link rel="stylesheet" href="dist/styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;900&display=swap");
+
+      :root {
+        --primary: #6366f1;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+      }
+
+      .title-font {
+        font-family: "Playfair Display", serif;
+      }
+
+      .star-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .hero-bg {
+        background: linear-gradient(
+          180deg,
+          rgba(10, 10, 31, 0.85) 0%,
+          rgba(15, 23, 42, 0.95) 100%
+        );
+      }
+    </style>
+  </head>
+  <body class="bg-[#0a0a1f] text-white overflow-x-hidden">
+     <nav
+      class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a1f]/95 backdrop-blur-md border-b border-white/10"
+    >
+      <div
+        class="max-w-screen-2xl mx-auto px-8 py-5 flex justify-between items-center"
+      >
+        <div class="flex items-center gap-x-4">
+          <div
+            onclick="window.location.reload()"
+            class="cursor-pointer w-11 h-11 bg-gradient-to-br from-indigo-400 via-purple-500 to-violet-500 rounded-2xl flex items-center justify-center text-3xl shadow-inner"
+          >
+            🌙
+          </div>
+          <div>
+            <span class="title-font text-3xl font-bold tracking-tighter"
+              >MOON &amp; MILKY WAY</span
+            >
+            <div class="text-[10px] text-purple-400 -mt-1 tracking-[2px]">
+              NEIL ISLAND • ANDAMAN
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="hidden lg:flex items-center gap-x-10 text-sm uppercase font-medium tracking-widest"
+        >
+          <a href="index.html" class="hover:text-purple-300 transition-colors"
+            >HOME</a
+          >
+          <a href="about.html" class="hover:text-purple-300 transition-colors"
+            >ABOUT</a
+          >
+          <a href="experiences.html" class="hover:text-purple-300 transition-colors"
+            >EXPERIENCES</a
+          >
+          <a href="booking.html" class="hover:text-purple-300 transition-colors"
+            >BOOK</a
+          >
+          <a href="contact.html" class="hover:text-purple-300 transition-colors"
+            >CONTACT</a
+          >
+        </div>
+
+        <div class="flex items-center gap-x-6">
+          <button
+            onclick="toggleTheme()"
+            id="theme-btn"
+            class="w-11 h-11 flex items-center justify-center rounded-2xl bg-white/10 hover:bg-white/20 transition-all text-xl"
+          >
+            <i id="theme-icon" class="fas fa-sun"></i>
+          </button>
+
+          <a
+            href="booking.html"
+            class="px-8 py-4 bg-white text-black rounded-3xl font-semibold flex items-center gap-x-3 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-purple-500/30"
+          >
+            <i class="fas fa-rocket"></i>
+            <span>BOOK YOUR NIGHT</span>
+          </a>
+
+          <button onclick="toggleMobile()" class="lg:hidden text-3xl">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main class="pt-28 max-w-auto mx-auto px-6">
+      <!-- HERO -->
+      <section class="min-h-screen hero-bg flex items-center relative pt-20">
+        <canvas id="stars-canvas" class="star-canvas"></canvas>
+
+        <div class="max-w-screen-2xl mx-auto px-8 relative z-10 text-center">
+          <span
+            class="inline-block px-8 py-3 bg-white/10 backdrop-blur rounded-3xl text-sm tracking-widest mb-6"
+            >SIGNATURE NIGHT SKY EXPERIENCES</span
+          >
+          <h1
+            class="title-font text-7xl md:text-8xl font-black tracking-tighter leading-none mb-8"
+          >
+            CHOOSE YOUR<br />CELESTIAL JOURNEY
+          </h1>
+          <p class="max-w-2xl mx-auto text-xl text-white/80">
+            From intimate family nights to exclusive VIP sessions — every
+            experience is crafted under the pristine dark skies of Neil Island.
+          </p>
+        </div>
+      </section>
+
+      <!-- EXPERIENCES GRID -->
+      <section class="py-24">
+        <div class="max-w-screen-2xl mx-auto px-8">
+          <div class="grid lg:grid-cols-3 gap-10">
+            <!-- Experience 1 -->
+            <div
+              class="group bg-[#111827] rounded-3xl overflow-hidden border border-transparent hover:border-purple-400/50 transition-all hover:-translate-y-4"
+            >
+              <div
+                class="h-80 bg-cover bg-center relative"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1511497588682-9f4c6b6e6e0d?q=80&w=2070&quot;);
+                "
+              >
+                <div
+                  class="absolute top-6 left-6 px-5 py-2 bg-black/70 rounded-2xl text-sm font-medium"
+                >
+                  2.5 HOURS
+                </div>
+              </div>
+              <div class="p-10">
+                <h3 class="title-font text-4xl font-bold mb-4">
+                  Milky Way Odyssey
+                </h3>
+                <div class="text-3xl font-bold text-purple-300 mb-6">
+                  ₹2,499
+                  <span class="text-sm font-normal text-white/60"
+                    >per adult</span
+                  >
+                </div>
+
+                <ul class="space-y-3 text-white/80 mb-10">
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Professional
+                    telescope viewing
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Milky Way
+                    photography guidance
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Constellation
+                    storytelling
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Hot beverages
+                    &amp; snacks
+                  </li>
+                </ul>
+
+                <button
+                  onclick="bookExperience('Milky Way Odyssey')"
+                  class="w-full py-5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl font-semibold text-lg hover:brightness-110 transition"
+                >
+                  Book This Experience
+                </button>
+              </div>
+            </div>
+
+            <!-- Experience 2 -->
+            <div
+              class="group bg-[#111827] rounded-3xl overflow-hidden border border-transparent hover:border-purple-400/50 transition-all hover:-translate-y-4"
+            >
+              <div
+                class="h-80 bg-cover bg-center relative"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1538370965046-79c0d6907d47?q=80&w=2070&quot;);
+                "
+              >
+                <div
+                  class="absolute top-6 left-6 px-5 py-2 bg-black/70 rounded-2xl text-sm font-medium"
+                >
+                  FAMILY FRIENDLY
+                </div>
+              </div>
+              <div class="p-10">
+                <h3 class="title-font text-4xl font-bold mb-4">
+                  Moon &amp; Planets
+                </h3>
+                <div class="text-3xl font-bold text-purple-300 mb-6">
+                  ₹1,799
+                  <span class="text-sm font-normal text-white/60"
+                    >per adult</span
+                  >
+                </div>
+
+                <ul class="space-y-3 text-white/80 mb-10">
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Kid-friendly
+                    telescope session
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Moon craters
+                    &amp; Jupiter/Saturn view
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Mythology
+                    &amp; basic astronomy talk
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Perfect for
+                    first-timers
+                  </li>
+                </ul>
+
+                <button
+                  onclick="bookExperience('Moon & Planets')"
+                  class="w-full py-5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl font-semibold text-lg hover:brightness-110 transition"
+                >
+                  Book This Experience
+                </button>
+              </div>
+            </div>
+
+            <!-- Experience 3 -->
+            <div
+              class="group bg-[#111827] rounded-3xl overflow-hidden border border-transparent hover:border-purple-400/50 transition-all hover:-translate-y-4"
+            >
+              <div
+                class="h-80 bg-cover bg-center relative"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=2070&quot;);
+                "
+              >
+                <div
+                  class="absolute top-6 left-6 px-5 py-2 bg-black/70 rounded-2xl text-sm font-medium"
+                >
+                  VIP • PRIVATE
+                </div>
+              </div>
+              <div class="p-10">
+                <h3 class="title-font text-4xl font-bold mb-4">
+                  VIP Telescope Night
+                </h3>
+                <div class="text-3xl font-bold text-purple-300 mb-6">
+                  ₹4,999
+                  <span class="text-sm font-normal text-white/60"
+                    >up to 4 guests</span
+                  >
+                </div>
+
+                <ul class="space-y-3 text-white/80 mb-10">
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Fully private
+                    session
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Expert
+                    astronomer guide
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Advanced
+                    astrophotography tips
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <i class="fas fa-check text-emerald-400"></i> Premium setup
+                    + refreshments
+                  </li>
+                </ul>
+
+                <button
+                  onclick="bookExperience('VIP Telescope Night')"
+                  class="w-full py-5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl font-semibold text-lg hover:brightness-110 transition"
+                >
+                  Book Private Session
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HIGHLIGHTS -->
+      <section class="py-24 bg-black/40">
+        <div class="max-w-screen-2xl mx-auto px-8">
+          <h2 class="title-font text-5xl font-bold text-center mb-16">
+            What Makes Us Special
+          </h2>
+          <div class="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div class="text-6xl mb-4">🔭</div>
+              <h4 class="font-semibold text-xl mb-2">
+                High-Quality Telescopes
+              </h4>
+              <p class="text-white/70">Celestron &amp; Sky-Watcher equipment</p>
+            </div>
+            <div>
+              <div class="text-6xl mb-4">🌌</div>
+              <h4 class="font-semibold text-xl mb-2">Bortle Class 2 Skies</h4>
+              <p class="text-white/70">One of the darkest in India</p>
+            </div>
+            <div>
+              <div class="text-6xl mb-4">📸</div>
+              <h4 class="font-semibold text-xl mb-2">Photography Guidance</h4>
+              <p class="text-white/70">Capture the Milky Way like a pro</p>
+            </div>
+            <div>
+              <div class="text-6xl mb-4">🌿</div>
+              <h4 class="font-semibold text-xl mb-2">Eco-Friendly Tours</h4>
+              <p class="text-white/70">Leave no trace, protect dark skies</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="py-24">
+        <div class="max-w-screen-2xl mx-auto px-8 text-center">
+          <h2 class="title-font text-5xl font-bold mb-12">
+            What Our Guests Say
+          </h2>
+          <div
+            class="max-w-3xl mx-auto bg-white/5 border border-white/10 p-12 rounded-3xl italic text-xl"
+          >
+            "The Milky Way Odyssey was the highlight of our Andaman trip. Seeing
+            the galaxy so clearly with a professional guide was life-changing."
+            <div class="mt-8 text-purple-400">
+              - Ananya &amp; Rohan, Bangalore
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section
+        class="py-28 text-center bg-gradient-to-b from-transparent via-purple-950/30 to-transparent"
+      >
+        <div class="max-w-2xl mx-auto px-6">
+          <h2 class="title-font text-6xl font-bold mb-6">
+            Ready to touch the stars?
+          </h2>
+          <p class="text-xl text-white/70 mb-10">
+            Limited slots available every night. Book now to secure your cosmic
+            experience.
+          </p>
+          <a
+            href="booking.html"
+            class="inline-flex items-center gap-x-4 px-14 py-7 bg-white text-black rounded-3xl text-2xl font-semibold hover:scale-105 transition-all"
+          >
+            <i class="fas fa-rocket"></i>
+            RESERVE YOUR NIGHT
+          </a>
+        </div>
+      </section>
+    </main>
+
+     <footer class="bg-black pt-16 pb-12 border-t border-white/10">
+      <div class="max-w-screen-2xl mx-auto px-8">
+        <div class="grid md:grid-cols-12 gap-12">
+          <!-- Brand Column -->
+          <div class="md:col-span-4">
+            <div class="flex items-center gap-x-4 mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-indigo-400 via-purple-500 to-violet-500 rounded-2xl flex items-center justify-center text-4xl"
+              >
+                🌙
+              </div>
+              <div>
+                <span class="title-font text-3xl font-bold tracking-tighter"
+                  >MOON &amp; MILKY WAY</span
+                >
+              </div>
+            </div>
+            <p class="text-white/70 max-w-xs">
+              Premium stargazing experiences under the clearest skies of Neil
+              Island, Andaman & Nicobar Islands.
+            </p>
+            <div class="mt-8 text-white/50 text-sm">
+              © 2026 Moon & Milky Way • All Rights Reserved
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="md:col-span-2">
+            <h4 class="uppercase text-xs tracking-widest text-white/60 mb-6">
+              Explore
+            </h4>
+            <ul class="space-y-3 text-white/80">
+              <li>
+                <a href="index.html" class="hover:text-purple-300 transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="about.html" class="hover:text-purple-300 transition"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="experiences.html"
+                  class="hover:text-purple-300 transition"
+                  >Experiences</a
+                >
+              </li>
+              <li>
+                <a href="booking.html" class="hover:text-purple-300 transition"
+                  >Book Now</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="md:col-span-3">
+            <h4 class="uppercase text-xs tracking-widest text-white/60 mb-6">
+              Contact Us
+            </h4>
+            <div class="space-y-4 text-white/80">
+              <a
+                href="https://wa.me/919876543210"
+                target="_blank"
+                class="flex items-center gap-3 hover:text-purple-300 transition"
+              >
+                <i class="fab fa-whatsapp text-xl"></i>
+                <span>+91 98765 43210</span>
+              </a>
+              <a
+                href="mailto:hello@moonnmilkyway.com"
+                class="flex items-center gap-3 hover:text-purple-300 transition"
+              >
+                <i class="fas fa-envelope text-xl"></i>
+                <span>hello@moonnmilkyway.com</span>
+              </a>
+              <div class="flex items-center gap-3">
+                <i class="fas fa-map-marker-alt text-xl"></i>
+                <span
+                  >Govind Nagar Beach,<br />Neil Island, Andaman & Nicobar</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Social & Instagram -->
+          <div class="md:col-span-3">
+            <h4 class="uppercase text-xs tracking-widest text-white/60 mb-6">
+              Follow the Stars
+            </h4>
+            <a
+              href="https://www.instagram.com/moon_n_milkyway"
+              target="_blank"
+              class="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 transition px-6 py-4 rounded-3xl"
+            >
+              <i class="fab fa-instagram text-3xl"></i>
+              <div>
+                <div class="font-medium">@moon_n_milkyway</div>
+                <div class="text-xs text-purple-400">Instagram</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50"
+        >
+          <div>Handcrafted with cosmic love 🌌</div>
+          <a
+            href="https://www.shivwebs.online/"
+            target="_blank"
+            class="mt-4 md:mt-0"
+          >
+            Designed &amp; Developed by
+            <span class="text-purple-400">&lt;/&gt;</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Three.js Stars
+      let scene, camera, renderer, starField;
+      function createStars() {
+        const canvas = document.getElementById("stars-canvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000,
+        );
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const vertices = [];
+        for (let i = 0; i < 15000; i++) {
+          vertices.push(
+            THREE.MathUtils.randFloatSpread(2000),
+            THREE.MathUtils.randFloatSpread(2000),
+            THREE.MathUtils.randFloatSpread(2000),
+          );
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(vertices, 3),
+        );
+
+        const material = new THREE.PointsMaterial({
+          size: 1.6,
+          color: 0xcccccc,
+          transparent: true,
+          opacity: 0.9,
+        });
+        starField = new THREE.Points(geometry, material);
+        scene.add(starField);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          starField.rotation.y += 0.00008;
+          renderer.render(scene, camera);
+        }
+        animate();
+      }
+
+      function toggleTheme() {
+        const icon = document.getElementById("theme-icon");
+        if (icon.classList.contains("fa-sun")) {
+          icon.classList.replace("fa-sun", "fa-moon");
+          const toast = document.createElement("div");
+          toast.style.cssText = `position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:rgba(15,23,42,0.97);color:white;padding:40px 60px;border-radius:30px;text-align:center;border:3px solid #a5b4fc;`;
+          toast.innerHTML = `<div style="font-size:80px;margin-bottom:20px;">☀️</div><div style="font-size:22px;">You can't see stars at day...</div>`;
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 2200);
+          setTimeout(() => icon.classList.replace("fa-moon", "fa-sun"), 2000);
+        }
+      }
+
+      window.onload = createStars;
+      window.addEventListener("resize", () => {
+        if (renderer) renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

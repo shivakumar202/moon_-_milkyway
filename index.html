@@ -40,6 +40,15 @@
           rgba(15, 23, 42, 0.95) 100%
         );
       }
+      /* prevent horizontal overflow on small devices */
+      html, body { overflow-x: hidden; }
+      img { max-width: 100%; height: auto; }
+
+      /* Responsive base font sizing */
+      html { font-size: 16px; }
+      @media (max-width: 1024px) { html { font-size: 15px; } }
+      @media (max-width: 768px) { html { font-size: 14px; } }
+      @media (max-width: 420px) { html { font-size: 13px; } }
     </style>
   </head>
   <body class="bg-[#0a0a1f] text-white overflow-x-hidden">
@@ -112,6 +121,21 @@
         </div>
       </div>
     </nav>
+
+    <!-- Mobile Off-canvas Menu -->
+    <div id="mobileMenu" class="fixed inset-y-0 right-0 w-64 bg-[#0a0a1f] p-6 transform translate-x-full transition-transform duration-300 z-50">
+      <div class="flex justify-between items-center mb-6">
+        <div class="text-lg font-bold">Menu</div>
+        <button onclick="toggleMobile()" aria-label="Close menu" class="text-2xl">&times;</button>
+      </div>
+      <nav class="flex flex-col gap-4">
+        <a href="index.html" class="hover:text-purple-300">Home</a>
+        <a href="about.html" class="hover:text-purple-300">About</a>
+        <a href="experiences.html" class="hover:text-purple-300">Experiences</a>
+        <a href="booking.html" class="hover:text-purple-300">Book</a>
+        <a href="contact.html" class="hover:text-purple-300">Contact</a>
+      </nav>
+    </div>
 
     <!-- HERO -->
     <section id="home" class="min-h-screen hero-bg flex items-center relative">
@@ -840,7 +864,18 @@
       }
 
       function toggleMobile() {
-        alert("Mobile menu would appear here in a full production build ✨");
+        const m = document.getElementById('mobileMenu');
+        if (!m) return;
+        const isOpen = m.classList.contains('translate-x-0');
+        if (isOpen) {
+          m.classList.remove('translate-x-0');
+          m.classList.add('translate-x-full');
+          document.body.classList.remove('overflow-hidden');
+        } else {
+          m.classList.remove('translate-x-full');
+          m.classList.add('translate-x-0');
+          document.body.classList.add('overflow-hidden');
+        }
       }
 
       function selectExperience(n) {

@@ -40,6 +40,13 @@
           rgba(15, 23, 42, 0.95) 100%
         );
       }
+      /* prevent horizontal overflow and responsive typography */
+      html, body { overflow-x: hidden; }
+      img { max-width: 100%; height: auto; }
+      html { font-size: 16px; }
+      @media (max-width: 1024px) { html { font-size: 15px; } }
+      @media (max-width: 768px) { html { font-size: 14px; } }
+      @media (max-width: 420px) { html { font-size: 13px; } }
     </style>
   </head>
   <body class="bg-[#0a0a1f] text-white overflow-x-hidden">
@@ -97,7 +104,7 @@
 
           <a
             href="booking.html"
-            class="px-8 py-4 bg-white text-black rounded-3xl font-semibold flex items-center gap-x-3 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-purple-500/30"
+            class="hidden lg:flex px-8 py-4 bg-white text-black rounded-3xl font-semibold items-center gap-x-3 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-purple-500/30"
           >
             <i class="fas fa-rocket"></i>
             <span>BOOK YOUR NIGHT</span>
@@ -109,20 +116,24 @@
         </div>
       </div>
     </nav>
+    <!-- Mobile Off-canvas Backdrop -->
+    <div id="mobileBackdrop" class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 z-40"></div>
+
     <!-- Mobile Off-canvas Menu -->
-    <div id="mobileMenu" class="fixed inset-y-0 right-0 w-64 bg-[#0a0a1f] p-6 transform translate-x-full transition-transform duration-300 z-50">
+    <aside id="mobileMenu" class="fixed inset-y-0 right-0 w-72 sm:w-80 bg-[#0a0a1f] p-6 transform translate-x-full transition-transform duration-300 z-50" role="dialog" aria-modal="true">
       <div class="flex justify-between items-center mb-6">
         <div class="text-lg font-bold">Menu</div>
         <button onclick="toggleMobile()" aria-label="Close menu" class="text-2xl">&times;</button>
       </div>
-      <nav class="flex flex-col gap-4">
+      <nav class="flex flex-col gap-4 mb-6">
         <a href="index.html" class="hover:text-purple-300">Home</a>
         <a href="about.html" class="hover:text-purple-300">About</a>
         <a href="experiences.html" class="hover:text-purple-300">Experiences</a>
         <a href="booking.html" class="hover:text-purple-300">Book</a>
         <a href="contact.html" class="hover:text-purple-300">Contact</a>
       </nav>
-    </div>
+      <a href="http://127.0.0.1:5500/booking.html" class="block mt-auto px-6 py-4 bg-white text-black rounded-3xl font-semibold text-center">BOOK YOUR NIGHT</a>
+    </aside>
 
     <!-- HERO -->
     <section class="min-h-screen hero-bg flex items-center relative pt-20">
@@ -540,17 +551,29 @@
   <script>
     function toggleMobile() {
       const m = document.getElementById('mobileMenu');
-      if (!m) return;
+      const b = document.getElementById('mobileBackdrop');
+      if (!m || !b) return;
       const isOpen = m.classList.contains('translate-x-0');
       if (isOpen) {
         m.classList.remove('translate-x-0');
         m.classList.add('translate-x-full');
+        b.classList.remove('opacity-100');
+        b.classList.add('opacity-0');
+        b.classList.add('pointer-events-none');
         document.body.classList.remove('overflow-hidden');
       } else {
         m.classList.remove('translate-x-full');
         m.classList.add('translate-x-0');
+        b.classList.remove('opacity-0');
+        b.classList.add('opacity-100');
+        b.classList.remove('pointer-events-none');
         document.body.classList.add('overflow-hidden');
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('mobileBackdrop');
+      if (b) b.addEventListener('click', toggleMobile);
+    });
   </script>
 </html>
